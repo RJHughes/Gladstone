@@ -6,23 +6,83 @@
 {% endblock %}
 
 {% block content %}
+<script>
+var is_open = false
+var current_tab = null
+var i, x;
+function currentTab(tabName){
+  return tabName
+};
+
+function openTab(tabName) {
+  if (!is_open){
+    x = document.getElementsByClassName("card");
+    for (i = 0; i < x.length; i++) {
+      if (x[i].id != tabName){
+        x[i].style.display = "none";
+      }
+      $('.collapse').collapse('toggle')
+      is_open = true
+      console.log(x[i])
+      current_tab = currentTab(tabName)
+    }
+  }
+};
+function closeTab() {
+    if (is_open){
+    x = document.getElementsByClassName("card");
+    for (i = 0; i < x.length; i++) {
+      if (x[i].id != current_tab){
+        x[i].style.display = "block";
+      }
+      $('.collapse').collapse('toggle')
+      is_open = false
+    }
+  }
+};
+</script>
+
 <div class="container">
   <div class="card-deck mt-3">
-    <div class="card">
+    <div id="b1" class="card" onclick="openTab('b1');">
       <img class="card-img-top" src="https://i.pinimg.com/564x/c0/73/af/c073af28305f6991d72f1b7f0732631c.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Enchiladas</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <!-- List Group -->
+        <ul class="list-group list-group-flush">
+          <p class="card-text">Tasty shit made with love and tomoto stuff as well as beans and things. The crazy thing is that there's no meat like chicken or cow!</p>
+          <div class="collapse" id="collapseExample">
+            <li class="list-group-item">
+              <h6 class="card-subtitle mb-2 text-muted">Ingredients</h6>
+              <ul>
+                <li>bread</li>
+                <li>coffee beans</li>
+                <li>milk</li>
+                <li>butter</li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <h6 class="card-subtitle mb-2 text-muted">Method</h6>
+              <ol start="1">
+                <li>Bake in oven for an hour</li>
+                <li>Remove from oven</li>
+                <li>Allow to stand for ten minutes</li>
+                <li>Serve</li>
+              </ol>
+            </li>
+          </div>
+        </ul>
       </div>
     </div>
-    <div class="card">
+
+    <div id="b2" class="card" onclick="openTab('b2');">
       <img class="card-img-top" src="http://cf.wholeandheavenlyoven.com/wp-content/uploads/2016/06/Hawaiian-Grilled-Chicken-Mango-Salad7.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Mango Chicken Salad</h5>
         <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
       </div>
     </div>
-    <div class="card">
+    <div id="b3" class="card">
       <img class="card-img-top" src="https://i0.wp.com/sumofyum.com/wp-content/uploads/2018/01/Chicken-Diavolo-533-Adobe-2-600px-watermark.jpg?w=600&ssl=1" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Diavolo Chicken</h5>
@@ -30,5 +90,22 @@
       </div>
     </div>
   </div>
+
+
+    <div class="card-deck mt-3">
+{% for i in range(3) %}
+<div class="card">
+  <img class="card-img-top" src="https://i.pinimg.com/564x/c0/73/af/c073af28305f6991d72f1b7f0732631c.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Enchiladas</h5>
+    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+  </div>
 </div>
+{% endfor %}
+  </div>
+  <div class="collapse" id="collapseExample">
+    <button type="button" class="btn btn-primary" onclick="closeTab('b1');">Back</button>
+  </div>
+</div>
+
 {% endblock %}
